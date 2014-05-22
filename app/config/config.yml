@@ -28,6 +28,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        clank_host:    127.0.0.1
+        clank_port:    1337
 
 # Assetic Configuration
 assetic:
