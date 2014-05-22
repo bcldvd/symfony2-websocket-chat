@@ -45,7 +45,9 @@ Add "JDareClankBundle" to your assetic bundles in app/config (this is required t
 # Assetic Configuration
 assetic:
     ...
-    bundles:        [ JDareClankBundle ]
+    bundles:
+        - AcmeChatBundle
+        - JDareClankBundle
 ```
 
 ### Configure WebSocket Server
@@ -56,7 +58,7 @@ Add the following to your app/config.yml
 # Clank Configuration
 clank:
     web_socket_server:
-        port: 8080        #The port the socket server will listen on
+        port: 1337        #The port the socket server will listen on
         host: 127.0.0.1   #(optional) The host ip to bind to
 ```
 
