@@ -4,10 +4,16 @@ body {
 
 #panelChat{
   height:30em;
+  max-height:30em;
 }
 
 #panelChat .me{
   text-align:right;
+}
+
+#panelChat .alert{
+    padding:8px;
+    margin-bottom:5px;
 }
 
 .panel{

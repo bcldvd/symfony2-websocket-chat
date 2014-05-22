@@ -3,20 +3,17 @@
 {% block content %}
 
   <div class="panel panel-default" id="panelChat">
-    <div class="panel-heading">Your are connected on the 'General' channel</div>
+    <div class="panel-heading">Your are not connected to any channel</div>
     <div class="panel-body">
-        <div>Hey !</div>
-        <div class="me">Look I can talk !</div>
-        <div>Cool bro</div>
     </div>
   </div>
 
   <div class="form-group">
     <div class="input-group">
-      <span class="input-group-addon">David</span>
-      <input type="text" class="form-control" autofocus>
+      <span class="input-group-addon" id="nickname">Anonymous</span>
+      <input type="text" class="form-control" autofocus id="chat-input">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Send</button>
+        <button class="btn btn-default" type="button" id="send-chat">Send</button>
       </span>
     </div>
   </div>

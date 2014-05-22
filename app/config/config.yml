@@ -77,4 +77,12 @@ swiftmailer:
 clank:
     web_socket_server:
         port: 1337        #The port the socket server will listen on
-        host: 127.0.0.1   #(optional) The host ip to bind to
+        host: 127.0.0.1        #(optional) The host ip to bind to
+    rpc:
+        -
+            name: "chat" #Important! this is the network namespace used to match calls to this service!
+            service: "acme_chat.chat_rpc_service" #The service id.
+    topic:
+        -
+            name: "chat" #Important! this is the topic namespace used to match to this service!
+            service: "acme_chat.chat_topic_handler" #The service id.
