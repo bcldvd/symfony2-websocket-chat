@@ -1,0 +1,7 @@
+acme_chat_homepage:
+    pattern:  /
+    defaults: { _controller: AcmeChatBundle:Default:index }
+
+acme_chat_about:
+    pattern:  /about
+    defaults: { _controller: AcmeChatBundle:Default:about }

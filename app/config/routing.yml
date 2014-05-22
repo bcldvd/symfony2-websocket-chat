@@ -1,0 +1,4 @@
+acme_chat:
+    resource: "@AcmeChatBundle/Resources/config/routing.yml"
+    prefix:   /
+

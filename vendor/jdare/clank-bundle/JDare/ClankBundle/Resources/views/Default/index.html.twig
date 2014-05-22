@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title>ClankBundle</title>
+</head>
+<body>
+Hello!
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript">
+    (function($){
+        $(function(){
+            var clank = Clank.connect("ws://clank.local:8080");
+
+            clank.on("socket/connect", function(session){
+
+                /**
+                 * Pub Sub Example
+                 *
+                 */
+
+                session.subscribe("sample/channel/1234", function(uri, payload){
+                    console.log("Received message", uri, payload);
+                });
+
+                session.publish("sample/channel/1234", "Sup String");
+
+
+
+
+                /**
+                 * RPC Example
+                 */
+
+                session.call("sample/add_func", [2, 5])
+
+                        .then(
+
+                        function(result)
+                        {
+                            console.log("RPC Result", result);
+                        },
+
+                        function(error, desc)
+                        {
+                            console.log("RPC Error", error, desc);
+                        }
+
+                );
+            });
+
+            clank.on("socket/disconnect", function(data){
+                //console.log("Disconnected", data);
+            });
+
+        })
+    })(jQuery);
+
+</script>
+{{ clank_client() }}
+</body>
+</html>
