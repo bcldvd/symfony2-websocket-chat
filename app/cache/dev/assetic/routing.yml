@@ -1,5 +1,0 @@
-_assetic:
-    resource: .
-    type: assetic
-_app:
-    resource: /Users/David/Sites/Symfony/symfony2-websocket-chat/app/config/routing_dev.yml
