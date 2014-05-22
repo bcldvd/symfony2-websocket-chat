@@ -10,16 +10,12 @@
     <title>Sf2Ws Chat</title>
 
     <!-- CSS -->
-    {% stylesheets '@AcmeChatBundle/Resources/public/css/lib/*' %}
+    {% stylesheets
+      '@AcmeChatBundle/Resources/public/css/lib/*'
+      '@AcmeChatBundle/Resources/public/css/main.css'
+    %}
     <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
-
-    <!-- Add custom CSS here -->
-    <style>
-    body {
-        margin-top: 60px;
-    }
-    </style>
 
 </head>
 
@@ -43,6 +39,19 @@
                     <li><a href="{{path('acme_chat_about')}}">About</a>
                     </li>
                 </ul>
+
+
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                  <form class="navbar-form navbar-left form-horizontal">
+                    <div class="form-group">
+                      <label for="inputChannel" class="col-lg-4 control-label">Channel :</label>
+                      <div class="col-lg-8">
+                        <input type="text" class="form-control" id="inputChannel" placeholder="General">
+                    </div>
+                  </form>
+                </li>
+              </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
