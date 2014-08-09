@@ -5,8 +5,27 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="acme_chat.chat_topic_handler" class="Acme\ChatBundle\Topic\ChatTopic" />
-        <service id="acme_chat.chat_rpc_service" class="Acme\ChatBundle\RPC\ChatService" />
+
+        <!-- Topics -->
+        <service id="acme_chat.chat_topic_handler" class="Acme\ChatBundle\Topic\ChatTopic">
+            <argument type="service" id="acme_chat.client_storage" />
+        </service>
+
+        <!-- RPC : Custom functions -->
+        <service id="acme_chat.chat_rpc_service" class="Acme\ChatBundle\RPC\ChatService">
+            <argument type="service" id="acme_chat.client_storage" />
+        </service>
+
+        <!-- Client Event Listeners -->
+        <service id="kernel.listener.clank.client_event" class="Acme\ChatBundle\EventListeners\ClientEventListener">
+            <tag name="kernel.event_listener" event="clank.client.connected" method="onClientConnect" />
+            <tag name="kernel.event_listener" event="clank.client.disconnected" method="onClientDisconnect" />
+            <tag name="kernel.event_listener" event="clank.client.error" method="onClientError" />
+            <argument type="service" id="acme_chat.client_storage" />
+        </service>
+
+        <service id="acme_chat.client_storage"  class="Acme\ChatBundle\Client\ClientStorage"/>
+
     </services>
 
 </container>

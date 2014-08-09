@@ -2,12 +2,23 @@
 
 namespace Acme\ChatBundle\Topic;
 
+use Acme\ChatBundle\Client\ClientStorage;
 use Ratchet\ConnectionInterface as Conn;
-
 use JDare\ClankBundle\Server\App\Handler\TopicHandlerInterface;
 
 class ChatTopic implements TopicHandlerInterface
 {
+
+    /**
+     * @var ClientStorage $clientStorage
+     */
+    private $clientStorage;
+
+    function __construct(ClientStorage $clientStorage)
+    {
+        $this->clientStorage = $clientStorage;
+    }
+
     /**
      * Announce to this topic that someone else has joined the chat room
      *
@@ -18,12 +29,9 @@ class ChatTopic implements TopicHandlerInterface
      */
     public function onSubscribe(Conn $conn, $topic)
     {
-        if (!isset($conn->ChatNickname))
-        {
-            $conn->ChatNickname = "Guest";
-        }
+        $client = $this->clientStorage->getClient($conn);
 
-        $msg = $conn->ChatNickname . " joined the chat room.";
+        $msg =  $client->getName() . " joined the chat room.";
 
         $topic->broadcast(array("msg" => $msg, "from" => "System", "system" => true));
     }
@@ -36,7 +44,9 @@ class ChatTopic implements TopicHandlerInterface
      */
     public function onUnSubscribe(Conn $conn, $topic)
     {
-        $msg = $conn->ChatNickname . " left the chat room.";
+        $client = $this->clientStorage->getClient($conn);
+
+        $msg =  $client->getName() . " left the chat room.";
 
         $topic->broadcast(array("msg" => $msg, "from" => "System", "system" => true));
     }
@@ -53,7 +63,8 @@ class ChatTopic implements TopicHandlerInterface
     public function onPublish(Conn $conn, $topic, $event, array $exclude, array $eligible)
     {
         $event = htmlentities($event); // removing html/js
+        $client = $this->clientStorage->getClient($conn);
 
-        $topic->broadcast(array("msg" => $event, "from" => $conn->ChatNickname));
+        $topic->broadcast(array("msg" => $event, "from" => $client->getName()));
     }
 }

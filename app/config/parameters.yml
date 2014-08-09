@@ -2,10 +2,10 @@
 parameters:
     database_driver: pdo_mysql
     database_host: 127.0.0.1
-    database_port: null
+    database_port: 8889
     database_name: sf2_websocket_chat
     database_user: root
-    database_password: null
+    database_password: root
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
